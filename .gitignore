@@ -12,3 +12,5 @@ chillies-backend/.env
 
 # Dépendances locales
 npm-debug.log
+
+.env
