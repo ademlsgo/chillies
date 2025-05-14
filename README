@@ -1,8 +1,9 @@
+
 # Chillies - Application de Gestion de Cocktails
 
 ## 📋 Présentation
 
-Chillies est une application web permettant à des clients de commander des cocktails et de suivre l'état de leurs commandes en temps réel.&#x20;
+Chillies est une application web permettant à des clients de commander des cocktails et de suivre l'état de leurs commandes en temps réel.
 
 Un back-office est également prévu pour les administrateurs afin de gérer les cocktails, utilisateurs et commandes.
 
@@ -12,84 +13,87 @@ Un back-office est également prévu pour les administrateurs afin de gérer les
 
 ### Prérequis
 
-* Node.js (v18+ recommandé)
-* MySQL
-* npm ou yarn
+- Node.js (v18+ recommandé)
+- MySQL
+- npm ou yarn
 
 ### Installation
 
 1. Cloner le projet :
 
-```
+```bash
 git clone https://github.com/tonrepo/chillies.git
 cd chillies
 ```
 
-2. Installer les dépendances :
+2. Installer les dépendances du backend et du frontend :
 
-```
+```bash
+cd chillies-backend
+npm install
+cd ../chillies-frontend
 npm install
 ```
 
 3. Configurer l'environnement :
-   Créer un fichier `.env` à la racine :
 
+Copiez le fichier `.env.example` situé dans `chillies-backend/` et renommez-le en `.env` :
+
+```bash
+cd chillies-backend
+cp .env.example .env
 ```
-DB_HOST=localhost
-DB_USER=root
-DB_NAME=cocktailbar
-JWT_SECRET=5c24f5f783497db0c6c13414f7f21adf92b48de9659a3a794d78297a83869ec2
-PORT=3000
-```
+
+Complétez les valeurs si nécessaire (par exemple pour votre base MySQL).
 
 4. Lancer le backend :
 
-```
+```bash
 cd chillies-backend
 npm run dev
 ```
 
 5. Lancer le frontend :
 
-```
+```bash
 cd chillies-frontend
 npm run dev
 ```
 
-Le site sera disponible sur : `http://localhost:5173`.
+Le site sera accessible sur : [http://localhost:5173](http://localhost:5173).
 
 ---
 
 ## 📑 Routes utilisées
 
-### 🎨 Routes qui distribuent des vues (Frontend)
+### 🎨 Routes Frontend (vues)
 
-* `/` → Accueil client (liste cocktails + commande + suivi)
-* `/login` → Connexion admin
-* `/admin` → Dashboard admin
-* `/admin/cocktails` → Gestion des cocktails
-* `/admin/users` → Gestion des utilisateurs
-* `/admin/commande` → Gestion des commandes
+- `/` → Accueil client (liste des cocktails, commande et suivi)
+- `/login` → Connexion administrateur
+- `/admin` → Dashboard admin
+- `/admin/cocktails` → Gestion des cocktails
+- `/admin/users` → Gestion des utilisateurs
+- `/admin/commande` → Gestion des commandes
 
-### 🔧 API - Routes de données (Backend)
+### 🔧 Routes Backend (API)
 
 #### Authentification
 
-* `POST /api/auth/login` → Connexion admin
-* `GET /api/auth/me` → Récupérer les infos de l'utilisateur connecté
+- `POST /api/auth/login` → Connexion administrateur
+- `GET /api/auth/me` → Informations utilisateur connecté
 
 #### Cocktails
 
-* `GET /api/cocktails` → Récupérer tous les cocktails
+- `GET /api/cocktails` → Récupérer tous les cocktails
 
 #### Commandes
 
-* `GET /api/orders` → Récupérer toutes les commandes (admin)
-* `GET /api/orders/:id` → Détails d'une commande (admin)
-* `POST /api/orders` → Créer une commande (client)
-* `PUT /api/orders/:id` → Modifier une commande (admin)
-* `PATCH /api/orders/:id/status` → Changer le statut d'une commande (admin)
-* `DELETE /api/orders/:id` → Supprimer une commande (admin)
+- `GET /api/orders` → Récupérer toutes les commandes (admin)
+- `GET /api/orders/:id` → Détails d'une commande (admin)
+- `POST /api/orders` → Créer une commande (client)
+- `PUT /api/orders/:id` → Modifier une commande (admin)
+- `PATCH /api/orders/:id/status` → Changer le statut d'une commande (admin)
+- `DELETE /api/orders/:id` → Supprimer une commande (admin)
 
 ---
 
@@ -97,39 +101,39 @@ Le site sera disponible sur : `http://localhost:5173`.
 
 Le projet Chillies a été réalisé dans un cadre pédagogique en respectant les principes de la méthode Agile Scrum.
 
-### Objectifs principaux
+### Objectifs
 
-* Réaliser un site web complet client/admin
-* Séparer le frontend (React + Vite + MUI) du backend (Express + MySQL)
-* Appliquer la méthode Agile avec sprints et backlog
+- Développer un site web complet client/admin
+- Séparer frontend (React + Vite + MUI) et backend (Express + MySQL)
+- Suivre une méthodologie Agile avec sprints et backlog
 
 ### Outils de gestion
 
-* Trello : Kanban (To Do / In Progress / Done)
-* Bloc-Notes : Historique des bugs à régler
-* Sprints courts (2 semaines)
+- Trello : Kanban (To Do / In Progress / Done)
+- Bloc-Notes : suivi des bugs
+- Sprints courts de 2 semaines
 
 ### Difficultés rencontrées
 
-* Mise en place du suivi de commande en temps réel coté client
+- Implémentation du suivi de commande en temps réel côté client
 
 ---
 
 ## 📅 Planning des sprints
 
-| Sprint | Durée       | Objectifs                                                                 |
-| ------ | ----------- | ------------------------------------------------------------------------- |
-| 1      | Semaine 1-2 | Initialisation projet, configuration backend + base de données            |
-| 2      | Semaine 3-4 | Développement frontend client + affichage cocktails                       |
-| 3      | Semaine 5-6 | Ajout commandes + suivi commandes côté client                             |
-| 4      | Semaine 7-8 | Création espace admin : login, gestion cocktails, utilisateurs, commandes |
-| 5      | Semaine 9   | Corrections, tests, responsive design, amélioration UX/UI                 |
+| Sprint | Durée        | Objectifs                                                                 |
+|-------|--------------|---------------------------------------------------------------------------|
+| 1     | Semaines 1-2 | Initialisation projet, configuration backend + base de données            |
+| 2     | Semaines 3-4 | Développement frontend client + affichage cocktails                       |
+| 3     | Semaines 5-6 | Ajout des commandes + suivi des commandes côté client                     |
+| 4     | Semaines 7-8 | Création de l’espace admin : login, gestion cocktails, utilisateurs, commandes |
+| 5     | Semaine 9    | Corrections, tests, responsive design, amélioration UX/UI                 |
 
 ---
 
 ## 👥 Équipe
 
-* Développeur : Adem Fellah
+- Développeur : Adem Fellah
 
 ---
 
@@ -139,4 +143,11 @@ Le projet est en version MVP. Des améliorations sont possibles : notifications 
 
 ---
 
-Merci d'utiliser Chillie's 🍸🎉
+## ⚠️ Sécurité
+
+Le fichier `chillies-backend/.env` contenant les données sensibles est ignoré du dépôt public.  
+Veuillez dupliquer `chillies-backend/.env.example` en `chillies-backend/.env` et compléter les valeurs si besoin.
+
+---
+
+Merci d'utiliser Chillies 🍸🎉
