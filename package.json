@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@fontsource/fredoka": "^5.2.7",
+    "@mui/system": "^7.0.2",
+    "@reduxjs/toolkit": "^2.6.1",
+    "@types/react": "^19.1.2",
+    "@types/recharts": "^2.0.1",
+    "axios": "^1.8.4",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.5.0",
+    "recharts": "^2.15.2"
+  }
+}

@@ -1,0 +1,14 @@
+# Node modules
+node_modules/
+
+# Fichiers de log
+*.log
+
+# Fichiers de configuration de l'IDE
+.vscode/
+.idea/
+
+chillies-backend/.env
+
+# Dépendances locales
+npm-debug.log
