@@ -5,7 +5,7 @@ import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { CocktailList } from './pages/CocktailList'; // ✅ Composant client réel
 import { Login } from './pages/auth/Login';
 import AdminLayout from './layouts/AdminLayout';
-import AdminCocktails from './pages/admin/cocktails'; // ✅ Composant admin
+import AdminCocktails from './pages/admin/Cocktails'; // ✅ Composant admin
 import Users from './pages/admin/Users';
 import AdminCommandes from './pages/AdminCommandes';
 import { AuthProvider } from './contexts/AuthContext';

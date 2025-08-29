@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000'; // Suppression de /api car les routes sont déjà montées sur /api
+// Read API base from Vite env (test-friendly: also read process.env in Vitest)
+const API_URL = (import.meta as any).env?.VITE_API_URL || (process as any)?.env?.VITE_API_URL || 'http://localhost:8989';
 
 export const api = axios.create({
   baseURL: API_URL,

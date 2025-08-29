@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: chillies-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpass
+      MYSQL_DATABASE: cocktailbar
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-pyourpass"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+
+  backend:
+    build:
+      context: .
+      dockerfile: chillies-backend/Dockerfile
+    container_name: chillies-backend
+    environment:
+      DB_HOST: mysql
+      DB_USER: root
+      DB_PASSWORD: yourpass
+      DB_NAME: cocktailbar
+      JWT_SECRET: dev-secret
+      PORT: "8989"
+    ports:
+      - "8989:8989"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: chillies-frontend/Dockerfile
+    container_name: chillies-frontend
+    environment:
+      # Frontend will call backend on host port 8989
+      VITE_API_URL: http://localhost:8989
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+
