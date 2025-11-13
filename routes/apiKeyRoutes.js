@@ -11,7 +11,7 @@ const router = express.Router();
 const ApiKey = require('../models/ApiKey');
 
 const { verifyToken } = require('../middlewares/authMiddleware');
-const checkSuperUser = require('../middlewares/checkSuperUser');
+const { isSuperuser } = require('../middlewares/authMiddleware');
 
 /**
  * @swagger
@@ -24,25 +24,8 @@ const checkSuperUser = require('../middlewares/checkSuperUser');
  *     responses:
  *       201:
  *         description: API Key générée avec succès
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: API key generated successfully
- *                 apiKey:
- *                   type: string
- *                   example: "d3a9efc29c77f33d20f5bc2d7d097a3dc51f9b13f7c3c2740d70c2ec91d5286c"
- *       401:
- *         description: Token invalide ou manquant
- *       403:
- *         description: Accès refusé (superuser uniquement)
- *       500:
- *         description: Erreur serveur
  */
-router.post('/generate', verifyToken, checkSuperUser, async (req, res) => {
+router.post('/generate', verifyToken, isSuperuser, async (req, res) => {
     try {
         const newKey = crypto.randomBytes(32).toString('hex');
         const userId = req.user.id;

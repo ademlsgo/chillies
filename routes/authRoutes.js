@@ -9,7 +9,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const User = require('../models/user');
+const User = require('../models/User');
 
 require('dotenv').config();
 
@@ -17,36 +17,6 @@ require('dotenv').config();
    AUTH ADMIN (superuser / employee)
 ----------------------------------------------------------- */
 
-/**
- * @swagger
- * /api/v1/auth/login:
- *   post:
- *     summary: Connexion Admin (superuser / employee)
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - identifiant
- *               - password
- *             properties:
- *               identifiant:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       200:
- *         description: Connexion réussie
- *       400:
- *         description: Identifiants manquants
- *       401:
- *         description: Identifiant ou mot de passe incorrect
- *       403:
- *         description: Accès réservé aux admins
- */
 router.post('/login', async (req, res) => {
     const { identifiant, password } = req.body;
 
@@ -97,38 +67,6 @@ router.post('/login', async (req, res) => {
    REGISTER SUPERUSER
 ----------------------------------------------------------- */
 
-/**
- * @swagger
- * /api/v1/auth/register-superuser:
- *   post:
- *     summary: Créer un nouveau superuser
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - identifiant
- *               - password
- *             properties:
- *               identifiant:
- *                 type: string
- *               password:
- *                 type: string
- *               first_name:
- *                 type: string
- *               last_name:
- *                 type: string
- *               email:
- *                 type: string
- *     responses:
- *       201:
- *         description: Superuser créé
- *       400:
- *         description: Utilisateur déjà existant
- */
 router.post('/register-superuser', async (req, res) => {
     try {
         const { identifiant, password, first_name, last_name, email } = req.body;
@@ -165,16 +103,6 @@ router.post('/register-superuser', async (req, res) => {
    MIDDLEWARE JWT
 ----------------------------------------------------------- */
 
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     BearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- */
-
 const authenticateJWT = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
 
@@ -191,42 +119,12 @@ const authenticateJWT = (req, res, next) => {
    GOOGLE ONE TAP LOGIN
 ----------------------------------------------------------- */
 
-/**
- * @swagger
- * /api/v1/auth/google/login:
- *   post:
- *     summary: Connexion Google One Tap
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - googleId
- *             properties:
- *               googleId:
- *                 type: string
- *               email:
- *                 type: string
- *               firstName:
- *                 type: string
- *               lastName:
- *                 type: string
- *     responses:
- *       200:
- *         description: Connexion Google réussie
- *       500:
- *         description: Erreur serveur
- */
 router.post('/google/login', async (req, res) => {
     try {
         const { googleId, email, firstName, lastName } = req.body;
 
-        if (!googleId) {
+        if (!googleId)
             return res.status(400).json({ message: 'Google ID manquant.' });
-        }
 
         let user = await User.findOne({ where: { googleId } });
 
@@ -277,29 +175,14 @@ router.post('/google/login', async (req, res) => {
    /me
 ----------------------------------------------------------- */
 
-/**
- * @swagger
- * /api/v1/auth/me:
- *   get:
- *     summary: Infos du user connecté
- *     tags: [Auth]
- *     security:
- *       - BearerAuth: []
- *     responses:
- *       200:
- *         description: Infos du user
- *       401:
- *         description: Token manquant
- *       403:
- *         description: Token invalide
- */
 router.get('/me', authenticateJWT, (req, res) => {
     res.json(req.user);
 });
 
 /* ----------------------------------------------------------
-   EXPORTS
+   EXPORT
 ----------------------------------------------------------- */
+
 module.exports = {
     router,
     authenticateJWT

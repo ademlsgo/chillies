@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/User');
 const { Op } = require('sequelize');
 
 exports.getAllUsers = async (req, res) => {
@@ -123,4 +123,4 @@ exports.deleteUser = async (req, res) => {
     console.error('Erreur lors de la suppression de l\'utilisateur:', error);
     res.status(500).json({ message: 'Erreur lors de la suppression de l\'utilisateur' });
   }
-}; 
+};

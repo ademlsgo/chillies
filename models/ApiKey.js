@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const User = require('./user'); // FIX: Linux casse sensible
+const User = require('./User'); // FIX: Linux casse sensible
 
 const ApiKey = sequelize.define('ApiKey', {
     key: {
