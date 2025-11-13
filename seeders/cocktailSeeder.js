@@ -1,4 +1,5 @@
-const { Cocktail } = require('../models/cocktail');
+const Cocktail = require('../models/Cocktail');
+
 
 const seedCocktails = async () => {
     try {
@@ -81,4 +82,4 @@ const seedCocktails = async () => {
     }
 };
 
-module.exports = { seedCocktails }; 
+module.exports = { seedCocktails };
