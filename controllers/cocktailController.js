@@ -1,4 +1,4 @@
-const { Cocktail } = require('../models/cocktail');
+const { Cocktail } = require('../models/Cocktail');
 const { Op } = require('sequelize');
 
 // Get all cocktails
@@ -24,12 +24,12 @@ const getCocktailById = async (req, res) => {
     try {
         console.log(`Recherche du cocktail avec l'ID: ${req.params.id}`);
         const cocktail = await Cocktail.findByPk(req.params.id);
-        
+
         if (!cocktail) {
             console.log(`Cocktail avec l'ID ${req.params.id} non trouvé`);
             return res.status(404).json({ message: 'Cocktail non trouvé' });
         }
-        
+
         console.log(`Cocktail trouvé: ${cocktail.name}`);
         res.json(cocktail);
     } catch (error) {
@@ -64,12 +64,12 @@ const updateCocktail = async (req, res) => {
         const [updated] = await Cocktail.update(req.body, {
             where: { id: req.params.id }
         });
-        
+
         if (updated === 0) {
             console.log(`Cocktail avec l'ID ${req.params.id} non trouvé pour la mise à jour`);
             return res.status(404).json({ message: 'Cocktail non trouvé' });
         }
-        
+
         const updatedCocktail = await Cocktail.findByPk(req.params.id);
         console.log('Cocktail mis à jour avec succès:', updatedCocktail.id);
         res.json(updatedCocktail);
@@ -89,12 +89,12 @@ const deleteCocktail = async (req, res) => {
         const deleted = await Cocktail.destroy({
             where: { id: req.params.id }
         });
-        
+
         if (deleted === 0) {
             console.log(`Cocktail avec l'ID ${req.params.id} non trouvé pour la suppression`);
             return res.status(404).json({ message: 'Cocktail non trouvé' });
         }
-        
+
         console.log(`Cocktail ${req.params.id} supprimé avec succès`);
         res.status(204).send();
     } catch (error) {
