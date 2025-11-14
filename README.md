@@ -26,9 +26,9 @@ Login Admin (superuser / employee)
 
 JWT (Bearer Token)
 
-Google OAuth One Tap (bonus)
+Google OAuth One Tap
 
-Rôles utilisateur : user, employee, superuser
+Rôles : user, employee, superuser
 
 🍹 Gestion des Cocktails (CRUD complet)
 
@@ -46,7 +46,7 @@ Récupération / modification / suppression (admin)
 
 🔑 API Publique & API Keys dynamiques
 
-Génération d’une API key (superuser)
+Génération API Key (superuser)
 
 Accès public aux cocktails via x-api-key
 
@@ -65,7 +65,7 @@ Node.js
 
 Express
 
-Sequelize ORM
+Sequelize
 
 MySQL (Railway)
 
@@ -83,8 +83,8 @@ CORS
 
 📦 Installation locale
 1️⃣ Cloner le projet
-git clone https://github.com/tonCompte/chillies.git
-cd chillies-backend
+git clone https://github.com/ademlsgo/chillies.git
+cd chillies/chillies-backend
 
 2️⃣ Installer les dépendances
 npm install
@@ -119,8 +119,7 @@ Serveur lancé sur :
 👉 http://localhost:3000
 
 🗄️ Base de données (MySQL)
-
-Modèles disponibles :
+Modèles disponibles
 
 User
 
@@ -130,18 +129,16 @@ Order
 
 ApiKey
 
-Relations :
+Relations
 
 User → ApiKey (1-N)
 
 📚 Documentation Swagger
 
-Accessible à :
+Accessible ici :
+👉 http://localhost:3000/api-docs
 
-http://localhost:3000/api-docs
-
-
-Inclus :
+Inclut :
 
 paramètres
 
@@ -166,7 +163,7 @@ x-api-key: <clé>
 GET /api/v1/weather/Marseille
 
 
-Exemple de réponse :
+Exemple :
 
 {
 "city": "Marseille",
@@ -205,17 +202,21 @@ chillies-backend/
 🚀 Déploiement Railway
 1️⃣ Push GitHub
 
-Railway détecte automatiquement les pushes.
+Railway détecte automatiquement les mises à jour.
 
-2️⃣ Configuration des variables Railway
-
-Ajouter dans Variables :
+2️⃣ Ajouter les variables Railway
 
 SESSION_SECRET
 
 JWT_SECRET
 
-DB_HOST / USER / PASSWORD / NAME
+DB_HOST
+
+DB_USER
+
+DB_PASSWORD
+
+DB_NAME
 
 OPENWEATHER_API_KEY
 
@@ -224,12 +225,12 @@ GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET
 
 3️⃣ URL de production
-https://ton-projet.up.railway.app
+
+👉 https://chillies.up.railway.app
 
 
 Swagger live :
-
-https://ton-projet.up.railway.app/api-docs
+👉 https://chillies.up.railway.app/api-docs
 
 📄 Licence
 
