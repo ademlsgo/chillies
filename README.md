@@ -1,203 +1,172 @@
-📘 Chillie’s — REST API complète (Node.js, TypeScript, JWT, Sequelize, Swagger, API Key)
+📘 Chillie’s — Projet REST (Node.js, Express, MySQL, Sequelize, JWT)
 
-Chillie’s est une API REST moderne, sécurisée et documentée, conçue pour gérer :
+Chillie’s est une API REST complète permettant de gérer :
 
 les cocktails
 
-les commandes (client + admin)
+les commandes
 
-les utilisateurs et permissions
+les utilisateurs (roles : user / employee / superuser)
 
-une API publique avec clé d’accès
+une API publique via API Key dynamique
 
-une intégration tierce (OpenWeather)
+une intégration météo via l’API externe OpenWeather
 
-Google OAuth (bonus)
+une authentification sécurisée (JWT + Google OAuth)
 
-un panneau admin React/Vite (client séparé)
+une documentation Swagger
 
-Cette API a été développée dans le cadre d’un projet de maîtrise d’une architecture REST complète.
+Ce projet a été réalisé dans le cadre du module :
+Maîtrise d’une API REST & Architecture client-serveur.
 
-📌 Table des matières
+📌 Fonctionnalités
+🔐 Authentification & Permissions
 
-🚀 Fonctionnalités
+Login Admin (superuser / employee)
 
-🧩 Technologies utilisées
+JWT (Bearer Token)
 
-📦 Installation locale
+Google OAuth One Tap (bonus)
 
-⚙️ Configuration environnement (.env)
+Rôles utilisateur : user, employee, superuser
 
-🗄️ Base de données & ORM
+🍹 Gestion des Cocktails (CRUD complet)
 
-📚 Documentation Swagger
+GET all cocktails
 
-🌦 API Externe (OpenWeather)
+GET cocktail by ID
 
-🔑 API Publique via API Key
+POST / PUT / DELETE (routes protégées)
 
-🧱 Architecture du projet
+🛒 Gestion des Commandes
 
-🚀 Déploiement Railway
+Création de commande (client)
 
-🧪 Tests (optionnel)
+Récupération / modification / suppression (admin)
 
-📄 Licence
+🔑 API Publique & API Keys dynamiques
 
-🚀 Fonctionnalités
-🟢 Fonctionnalités principales
+Génération d’une API key (superuser)
 
-CRUD complet sur les cocktails
+Accès public aux cocktails via x-api-key
 
-Gestion complète des commandes (client + admin)
+🌦 API Externe — OpenWeather
 
-Gestion des utilisateurs (superuser/employee/user)
+/api/v1/weather/:city → météo en temps réel
 
-Authentification JWT
+📚 Swagger
 
-Permissions basées sur les rôles
-
-Architecture REST versionnée /api/v1/...
-
-Documentation Swagger complète
-
-Base de données relationnelle MySQL
-
-🟣 Fonctionnalités bonus incluses
-
-Google OAuth (One Tap)
-
-API publique protégée par API Key dynamique
-
-Intégration de l’API externe OpenWeather
-
-Panneau admin React + Vite
-
-Route météo /weather/:city
+Accessible ici :
+👉 /api-docs
 
 🧩 Technologies utilisées
-🔥 Backend
 
 Node.js
 
-TypeScript
-
 Express
 
-Sequelize (ORM)
+Sequelize ORM
 
-MySQL
+MySQL (Railway)
 
-JWT (JSON Web Token)
+JWT
 
-Google OAuth 2.0 (passport.js)
+bcrypt
 
 dotenv
 
-Swagger / OpenAPI 3
+Swagger (OpenAPI 3)
 
-API Key Middleware
+Google OAuth 2.0
 
-Cors
-
-Express-session
-
-🎨 Frontend Admin (projet séparé)
-
-React
-
-Vite
-
-Axios
-
-TailwindCSS
+CORS
 
 📦 Installation locale
 1️⃣ Cloner le projet
-git clone https://github.com/tonCompte/Chillies.git
-cd Chillies
+git clone https://github.com/tonCompte/chillies.git
+cd chillies-backend
 
 2️⃣ Installer les dépendances
 npm install
 
-3️⃣ Compiler TypeScript
-npm run build
+3️⃣ Créer un fichier .env
+PORT=3000
+SESSION_SECRET=your_session_secret
 
-4️⃣ Lancer le serveur
+# JWT
+JWT_SECRET=your_jwt_secret
+
+# DB Railway
+DB_HOST=...
+DB_USER=...
+DB_PASSWORD=...
+DB_NAME=...
+DB_DIALECT=mysql
+
+# OpenWeather API
+OPENWEATHER_API_KEY=your_weather_key
+
+# Google OAuth
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+GOOGLE_CALLBACK_URL=http://localhost:3000/api/v1/auth/google/callback
+
+4️⃣ Lancer l’application
 npm start
 
 
-Le serveur démarre sur :
+Serveur lancé sur :
 👉 http://localhost:3000
 
-⚙️ Configuration environnement (.env)
+🗄️ Base de données (MySQL)
 
-Créer un fichier .env à la racine :
+Modèles disponibles :
 
-# App
-PORT=3000
-SESSION_SECRET="secret"
+User
 
-# JWT
-JWT_SECRET="your_jwt_secret_here"
+Cocktail
 
-# DB (Railway ou local)
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=
-DB_NAME=chillies
-DB_DIALECT=mysql
+Order
 
-# Weather
-OPENWEATHER_API_KEY=your_api_key_here
+ApiKey
 
-# Google OAuth
-GOOGLE_CLIENT_ID=xxx
-GOOGLE_CLIENT_SECRET=xxx
-GOOGLE_CALLBACK_URL=http://localhost:3000/api/v1/auth/google/callback
+Relations :
 
-🗄️ Base de données & ORM
-Sequelize est utilisé pour :
-
-✔ Utiliser MySQL
-✔ Définir les modèles (Cocktail, User, Orders, ApiKey…)
-✔ Synchronisation automatique
-✔ Seeder (cocktails auto-ajoutés)
-
-Commande utile :
-
-npm run seed
+User → ApiKey (1-N)
 
 📚 Documentation Swagger
 
-📌 Disponible ici :
-👉 http://localhost:3000/api-docs
+Accessible à :
+
+http://localhost:3000/api-docs
+
 
 Inclus :
 
-Tous les endpoints documentés
+paramètres
 
-Paramètres
+schémas
 
-Body JSON
+sécurité
 
-Statuts HTTP
+rôles
 
-Sécurité (BearerAuth + API Key)
+réponses
 
-🌦 API Externe (OpenWeather)
+🔑 API Publique via API Key
+1️⃣ Générer une API Key
+POST /api/v1/api-keys/generate
+Authorization: Bearer <token superuser>
 
-Route publique météo :
+2️⃣ Consommer l’API publique
+GET /api/v1/public/cocktails
+x-api-key: <clé>
 
-GET /api/v1/weather/{city}
-
-
-Exemple :
-
-GET http://localhost:3000/api/v1/weather/Marseille
+🌦 Route Météo (API externe)
+GET /api/v1/weather/Marseille
 
 
-Réponse :
+Exemple de réponse :
 
 {
 "city": "Marseille",
@@ -205,37 +174,22 @@ Réponse :
 "description": "clear sky"
 }
 
-🔑 API Publique via API Key
-1️⃣ Générer une API Key (superuser)
-POST /api/v1/api-keys/generate
-Authorization: Bearer <token>
-
-2️⃣ Appeler une route publique :
-GET /api/v1/public/cocktails
-x-api-key: <your_key_here>
-
-🧱 Architecture du projet
-Chillies/
+🧱 Structure du projet
+chillies-backend/
 │
 ├── config/
 │   ├── database.js
 │   ├── swagger.js
 │
 ├── controllers/
-│   ├── cocktailController.js
-│   ├── orderController.js
-│   ├── userController.js
 │
 ├── middlewares/
-│   ├── authenticateJWT.js
-│   ├── checkApiKey.js
-│   ├── checkSuperUser.js
 │
 ├── models/
 │   ├── User.js
 │   ├── Cocktail.js
-│   ├── Order.js
 │   ├── ApiKey.js
+│   ├── Order.js
 │
 ├── routes/
 │   ├── authRoutes.js
@@ -249,20 +203,15 @@ Chillies/
 └── server.js
 
 🚀 Déploiement Railway
-1️⃣ Installer le CLI Railway
-npm install -g railway
+1️⃣ Push GitHub
 
-2️⃣ Se connecter
-railway login
+Railway détecte automatiquement les pushes.
 
-3️⃣ Initialiser projet
-railway init
+2️⃣ Configuration des variables Railway
 
-4️⃣ Lier à GitHub (recommandé)
+Ajouter dans Variables :
 
-Railway → New Project → Deploy from GitHub
-
-5️⃣ Ajouter les variables d’environnement (Dashboard Railway → Variables)
+SESSION_SECRET
 
 JWT_SECRET
 
@@ -274,24 +223,15 @@ GOOGLE_CLIENT_ID
 
 GOOGLE_CLIENT_SECRET
 
-SESSION_SECRET
+3️⃣ URL de production
+https://ton-projet.up.railway.app
 
-6️⃣ Déployer
 
-Railway déploie automatiquement dès que tu pushes sur GitHub.
+Swagger live :
 
-🧪 Tests (optionnel)
-
-Exemple de test Jest pour /api/v1/cocktails :
-
-describe("GET /api/v1/cocktails", () => {
-it("should return list of cocktails", async () => {
-const res = await request(app).get("/api/v1/cocktails");
-expect(res.status).toBe(200);
-});
-});
+https://ton-projet.up.railway.app/api-docs
 
 📄 Licence
 
-Projet développé dans le cadre d’un exercice pédagogique.
-Libre de réutilisation et d’adaptation.
+Projet réalisé dans un cadre pédagogique.
+Libre à la réutilisation et modification.
